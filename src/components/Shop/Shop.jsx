@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Link } from "react-router";
 import { useOutletContext } from "react-router";
+import styles from "./Shop.module.css";
 
 const Shop = () => {
   const {
@@ -48,9 +49,40 @@ const Shop = () => {
   return (
     <div>
       <h3>Hello I am Shop. Welcome to Shop</h3>
-      {productsList.map((product) => (
-        <div key={product.id}>{product.title}</div>
-      ))}
+      <section className={styles.productsContainer}>
+        {productsList.map((product) => (
+          <div key={product.id} className={styles.card}>
+            <div className={styles.descriptionContainer}>
+              <div>
+                {" "}
+                <img
+                  src={product.image}
+                  alt={product.title}
+                  className={styles.cardImage}
+                />
+              </div>
+              <p>{product.title}</p>
+              <p>
+                <strong>${product.price}</strong>
+              </p>
+            </div>
+            <div className={styles.cardControls}>
+              <button data-id={product.id} data-function="increment">
+                +
+              </button>
+              <input
+                data-id={product.id}
+                type="number"
+                value={product.quantitySelected}
+              />
+              <button data-id={product.id} data-function="decrement">
+                -
+              </button>
+              <button data-id={product.id}>Cart</button>
+            </div>
+          </div>
+        ))}
+      </section>
       <Link to="/">Back Home</Link>
     </div>
   );
