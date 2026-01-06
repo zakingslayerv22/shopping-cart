@@ -1,7 +1,27 @@
+import { useState, useCallback } from "react";
+
 import { Link, Outlet } from "react-router";
 import styles from "./Home.module.css";
 
 const Home = () => {
+  const [productsList, setProductsList] = useState(null);
+
+  const handleProductsList = useCallback((productsArray) => {
+    setProductsList(productsArray);
+  }, []);
+
+  const handleQuantityChange = ({ target }) => {
+    console.log(target);
+  };
+
+  const handleQuantityInput = ({ target }) => {
+    console.log(target);
+  };
+
+  const handleAddToCart = ({ target }) => {
+    console.log(target);
+  };
+
   return (
     <>
       <Link to="/">
@@ -14,7 +34,15 @@ const Home = () => {
       </nav>
       <hr />
 
-      <Outlet />
+      <Outlet
+        context={{
+          productsList,
+          handleProductsList,
+          handleQuantityChange,
+          handleQuantityInput,
+          handleAddToCart,
+        }}
+      />
     </>
   );
 };
