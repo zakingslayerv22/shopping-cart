@@ -33,7 +33,7 @@ const Shop = () => {
         }));
 
         handleProductsList(productsWithQuantities);
-        console.log(productsWithQuantities);
+        // console.log(productsWithQuantities);
       } catch (error) {
         console.log("Error:", error);
       }
@@ -67,18 +67,23 @@ const Shop = () => {
               </p>
             </div>
             <div className={styles.cardControls}>
-              <button data-id={product.id} data-function="increment">
+              <button
+                onClick={() => handleQuantityChange(product.id, "increment")}
+              >
                 +
               </button>
               <input
-                data-id={product.id}
                 type="number"
                 value={product.quantitySelected}
+                onChange={() => handleQuantityInput(product.id)}
               />
-              <button data-id={product.id} data-function="decrement">
+              <button
+                data-id={product.id}
+                onClick={() => handleQuantityChange(product.id, "decrement")}
+              >
                 -
               </button>
-              <button data-id={product.id}>Cart</button>
+              <button onClick={() => handleAddToCart(product.id)}>Cart</button>
             </div>
           </div>
         ))}
