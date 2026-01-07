@@ -6,12 +6,31 @@ import styles from "./Home.module.css";
 const Home = () => {
   const [productsList, setProductsList] = useState(null);
 
+  const cartItemsTotal = productsList
+    ? productsList.reduce(
+        (accumulator, currentValue) =>
+          accumulator + currentValue.quantityInCart,
+        0
+      )
+    : 0;
+
   const handleProductsList = useCallback((productsArray) => {
     setProductsList(productsArray);
   }, []);
 
-  const handleQuantityChange = ({ target }) => {
-    console.log(target);
+  const handleQuantityChange = (productId, action) => {
+    setProductsList((previousList) =>
+      previousList.map((product) => {
+        if (product.id !== productId) return product;
+
+        const delta = action === "increment" ? 1 : -1;
+
+        return {
+          ...product,
+          quantitySelected: Math.max(0, product.quantitySelected + delta),
+        };
+      })
+    );
   };
 
   const handleQuantityInput = ({ target }) => {
@@ -30,7 +49,7 @@ const Home = () => {
       </Link>
       <nav className={styles.nav}>
         <Link to="shop">Shop</Link>
-        <Link to="cart">Cart (0 items)</Link>
+        <Link to="cart">Cart ({cartItemsTotal} items)</Link>
       </nav>
       <hr />
 
