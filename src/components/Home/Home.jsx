@@ -53,12 +53,23 @@ const Home = () => {
     console.log(value);
   };
 
-  const handleAddToCart = ({ target }) => {
-    console.log(target);
+  const handleAddToCart = (productId) => {
+    setProductsList((previousList) =>
+      previousList.map((product) => {
+        if (product.id !== productId) return product;
+
+        return {
+          ...product,
+          quantityInCart:
+            Number(product.quantitySelected) + product.quantityInCart,
+        };
+      })
+    );
   };
 
   return (
     <>
+      {console.log(productsList)}
       <Link to="/">
         {" "}
         <h2>Shopping Cart Home</h2>

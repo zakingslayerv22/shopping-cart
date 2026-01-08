@@ -83,7 +83,12 @@ const Shop = () => {
               >
                 -
               </button>
-              <button onClick={() => handleAddToCart(product.id)}>Cart</button>
+              <button
+                onClick={() => handleAddToCart(product.id)}
+                disabled={!product.quantitySelected}
+              >
+                Cart
+              </button>
             </div>
           </div>
         ))}
