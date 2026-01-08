@@ -27,14 +27,30 @@ const Home = () => {
 
         return {
           ...product,
-          quantitySelected: Math.max(0, product.quantitySelected + delta),
+          quantitySelected: Math.max(
+            0,
+            Number(product.quantitySelected) + delta
+          ),
         };
       })
     );
   };
 
-  const handleQuantityInput = ({ target }) => {
-    console.log(target);
+  const handleQuantityInput = ({ target }, productId) => {
+    const { value } = target;
+
+    setProductsList((previousList) =>
+      previousList.map((product) => {
+        if (product.id !== productId) return product;
+
+        return {
+          ...product,
+          quantitySelected: value,
+        };
+      })
+    );
+
+    console.log(value);
   };
 
   const handleAddToCart = ({ target }) => {

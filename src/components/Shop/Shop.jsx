@@ -75,7 +75,7 @@ const Shop = () => {
               <input
                 type="number"
                 value={product.quantitySelected}
-                onChange={() => handleQuantityInput(product.id)}
+                onChange={(event) => handleQuantityInput(event, product.id)}
               />
               <button
                 data-id={product.id}
