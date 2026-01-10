@@ -1,10 +1,41 @@
-import { useState, useCallback } from "react";
+import { useState, useEffect } from "react";
 
 import { Link, Outlet } from "react-router";
 import styles from "./Home.module.css";
 
 const Home = () => {
   const [productsList, setProductsList] = useState(null);
+
+  useEffect(() => {
+    console.log("fetching");
+    const fetchProducts = async () => {
+      try {
+        const productsResponse = await fetch(
+          "https://fakestoreapi.com/products",
+          { mode: "cors" }
+        );
+
+        if (!productsResponse.ok) {
+          throw new Error(`Error fetching species: ${productsResponse.status}`);
+        }
+
+        const allProducts = await await productsResponse.json();
+
+        const productsWithQuantities = allProducts.map((product) => ({
+          ...product,
+          quantitySelected: 0,
+          quantityInCart: 0,
+          totalPriceInCart: 0,
+        }));
+
+        setProductsList(productsWithQuantities);
+      } catch (error) {
+        console.log("Error:", error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   const cartItemsTotal = productsList
     ? productsList.reduce(
@@ -13,10 +44,6 @@ const Home = () => {
         0
       )
     : 0;
-
-  const handleProductsList = useCallback((productsArray) => {
-    setProductsList(productsArray);
-  }, []);
 
   const handleQuantityChange = (productId, action) => {
     setProductsList((previousList) =>
@@ -83,7 +110,6 @@ const Home = () => {
       <Outlet
         context={{
           productsList,
-          handleProductsList,
           handleQuantityChange,
           handleQuantityInput,
           handleAddToCart,
