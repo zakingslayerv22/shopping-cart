@@ -1,0 +1,8 @@
+.productContainer {
+  display: flex;
+  gap: 2rem;
+}
+
+.productImage {
+  width: 3vw;
+}

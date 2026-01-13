@@ -1,4 +1,5 @@
 import { Link, useOutletContext } from "react-router";
+import styles from "./Cart.module.css";
 
 const Cart = () => {
   const { productsList } = useOutletContext();
@@ -28,9 +29,13 @@ const Cart = () => {
           if (!product.quantityInCart) return;
 
           return (
-            <div key={product.id}>
+            <div key={product.id} className={styles.productContainer}>
               <div>
-                <img src={product.image} />
+                <img
+                  src={product.image}
+                  className={styles.productImage}
+                  alt={product.title}
+                />
               </div>
 
               <div>
@@ -46,10 +51,10 @@ const Cart = () => {
               </div>
               <p>${product.quantityInCart * product.price}</p>
               <button>Remove</button>
-              <p>Total Price: {computeCartTotalPrice(productsList)}</p>
             </div>
           );
         })}
+        <p>Total Price: {computeCartTotalPrice(productsList)}</p>
       </section>
     </div>
   );
