@@ -3,6 +3,14 @@ import { Link, useOutletContext } from "react-router";
 const Cart = () => {
   const { productsList } = useOutletContext();
 
+  const computeCartTotalPrice = (productsList = []) => {
+    return productsList.reduce(
+      (total, currentProduct) =>
+        total + currentProduct.quantityInCart * currentProduct.price,
+      0
+    );
+  };
+
   if (!productsList) {
     return (
       <h2>No products in cart yet. Add products to cart first to continue.</h2>
@@ -38,6 +46,7 @@ const Cart = () => {
               </div>
               <p>${product.quantityInCart * product.price}</p>
               <button>Remove</button>
+              <p>Total Price: {computeCartTotalPrice(productsList)}</p>
             </div>
           );
         })}
