@@ -45,7 +45,7 @@ const Home = () => {
       )
     : 0;
 
-  const handleQuantityChange = (productId, action) => {
+  const handleQuantityChange = (productId, action, field) => {
     setProductsList((previousList) =>
       previousList.map((product) => {
         if (product.id !== productId) return product;
@@ -54,10 +54,7 @@ const Home = () => {
 
         return {
           ...product,
-          quantitySelected: Math.max(
-            0,
-            Number(product.quantitySelected) + delta
-          ),
+          [field]: Math.max(0, Number(product[field]) + delta),
         };
       })
     );

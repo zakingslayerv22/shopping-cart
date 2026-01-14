@@ -36,7 +36,13 @@ const Shop = () => {
             </div>
             <div className={styles.cardControls}>
               <button
-                onClick={() => handleQuantityChange(product.id, "increment")}
+                onClick={() =>
+                  handleQuantityChange(
+                    product.id,
+                    "increment",
+                    "quantitySelected"
+                  )
+                }
               >
                 +
               </button>
@@ -47,7 +53,13 @@ const Shop = () => {
               />
               <button
                 data-id={product.id}
-                onClick={() => handleQuantityChange(product.id, "decrement")}
+                onClick={() =>
+                  handleQuantityChange(
+                    product.id,
+                    "decrement",
+                    "quantitySelected"
+                  )
+                }
               >
                 -
               </button>

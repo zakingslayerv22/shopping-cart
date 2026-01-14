@@ -2,7 +2,7 @@ import { Link, useOutletContext } from "react-router";
 import styles from "./Cart.module.css";
 
 const Cart = () => {
-  const { productsList } = useOutletContext();
+  const { productsList, handleQuantityChange } = useOutletContext();
 
   const computeCartTotalPrice = (productsList = []) => {
     return productsList.reduce(
@@ -45,9 +45,29 @@ const Cart = () => {
 
               <p>${product.price}</p>
               <div>
-                <button>+</button>
+                <button
+                  onClick={() =>
+                    handleQuantityChange(
+                      product.id,
+                      "increment",
+                      "quantityInCart"
+                    )
+                  }
+                >
+                  +
+                </button>
                 <input value={product.quantityInCart} />
-                <button>-</button>
+                <button
+                  onClick={() =>
+                    handleQuantityChange(
+                      product.id,
+                      "decrement",
+                      "quantityInCart"
+                    )
+                  }
+                >
+                  -
+                </button>
               </div>
               <p>${product.quantityInCart * product.price}</p>
               <button>Remove</button>
