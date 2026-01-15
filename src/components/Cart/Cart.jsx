@@ -2,7 +2,8 @@ import { Link, useOutletContext } from "react-router";
 import styles from "./Cart.module.css";
 
 const Cart = () => {
-  const { productsList, handleQuantityChange } = useOutletContext();
+  const { productsList, handleQuantityChange, updateCartQuantity } =
+    useOutletContext();
 
   const computeCartTotalPrice = (productsList = []) => {
     return productsList.reduce(
@@ -23,7 +24,6 @@ const Cart = () => {
       {console.log(productsList)}
       <h3>Hello, I am Cart. You can add things to the cart!</h3>
       <Link to="/">Back Home</Link>
-
       <section>
         {productsList.map((product) => {
           if (!product.quantityInCart) return;
@@ -32,7 +32,7 @@ const Cart = () => {
             <div key={product.id} className={styles.productContainer}>
               <div>
                 <img
-                  src={product.image}
+                  src={product.images[0]}
                   className={styles.productImage}
                   alt={product.title}
                 />
@@ -56,7 +56,8 @@ const Cart = () => {
                 >
                   +
                 </button>
-                <input value={product.quantityInCart} />
+                <p>{product.quantityInCart}</p>
+
                 <button
                   onClick={() =>
                     handleQuantityChange(
@@ -70,12 +71,15 @@ const Cart = () => {
                 </button>
               </div>
               <p>${product.quantityInCart * product.price}</p>
-              <button>Remove</button>
+              <button onClick={() => updateCartQuantity(product.id, "remove")}>
+                Remove
+              </button>
             </div>
           );
         })}
         <p>Total Price: {computeCartTotalPrice(productsList)}</p>
       </section>
+      <button>Proceed to checkout</button>
     </div>
   );
 };

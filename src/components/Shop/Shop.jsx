@@ -7,7 +7,7 @@ const Shop = () => {
     productsList,
     handleQuantityChange,
     handleQuantityInput,
-    handleAddToCart,
+    updateCartQuantity,
   } = useOutletContext();
 
   if (!productsList) {
@@ -24,7 +24,7 @@ const Shop = () => {
               <div>
                 {" "}
                 <img
-                  src={product.image}
+                  src={product.images[0]}
                   alt={product.title}
                   className={styles.cardImage}
                 />
@@ -64,7 +64,7 @@ const Shop = () => {
                 -
               </button>
               <button
-                onClick={() => handleAddToCart(product.id)}
+                onClick={() => updateCartQuantity(product.id, "add")}
                 disabled={!product.quantitySelected}
               >
                 Cart

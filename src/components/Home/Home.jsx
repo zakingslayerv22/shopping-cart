@@ -11,7 +11,7 @@ const Home = () => {
     const fetchProducts = async () => {
       try {
         const productsResponse = await fetch(
-          "https://fakestoreapi.com/products",
+          "https://api.escuelajs.co/api/v1/products?offset=0&limit=20",
           { mode: "cors" }
         );
 
@@ -77,15 +77,18 @@ const Home = () => {
     console.log(value);
   };
 
-  const handleAddToCart = (productId) => {
+  const updateCartQuantity = (productId, action) => {
     setProductsList((previousList) =>
       previousList.map((product) => {
         if (product.id !== productId) return product;
 
         return {
           ...product,
+          quantitySelected: 0,
           quantityInCart:
-            Number(product.quantitySelected) + product.quantityInCart,
+            action === "add"
+              ? Number(product.quantitySelected) + product.quantityInCart
+              : 0,
         };
       })
     );
@@ -109,7 +112,7 @@ const Home = () => {
           productsList,
           handleQuantityChange,
           handleQuantityInput,
-          handleAddToCart,
+          updateCartQuantity,
         }}
       />
     </>
