@@ -7,7 +7,7 @@ const Home = () => {
   const [productsList, setProductsList] = useState(null);
 
   useEffect(() => {
-    console.log("fetching");
+    // console.log("fetching");
     const fetchProducts = async () => {
       try {
         const productsResponse = await fetch(
@@ -16,7 +16,9 @@ const Home = () => {
         );
 
         if (!productsResponse.ok) {
-          throw new Error(`Error fetching species: ${productsResponse.status}`);
+          throw new Error(
+            `Error fetching products: ${productsResponse.status}`
+          );
         }
 
         const allProducts = await await productsResponse.json();
@@ -25,7 +27,7 @@ const Home = () => {
           ...product,
           quantitySelected: 0,
           quantityInCart: 0,
-          totalPriceInCart: 0,
+          // totalPriceInCart: 0,
         }));
 
         setProductsList(productsWithQuantities);
@@ -99,7 +101,7 @@ const Home = () => {
       {console.log(productsList)}
       <Link to="/">
         {" "}
-        <h2>Shopping Cart Home</h2>
+        <h2>Home</h2>
       </Link>
       <nav className={styles.nav}>
         <Link to="shop">Shop</Link>

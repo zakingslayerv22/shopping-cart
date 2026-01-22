@@ -1,6 +1,6 @@
 import { RouterProvider, createMemoryRouter } from "react-router";
 import { describe, it, expect, vi } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import routes from "../../config/routes";
 
 vi.mock("../Shop/Shop", () => ({
@@ -55,5 +55,22 @@ describe("Home component and Routing", () => {
     render(<RouterProvider router={router} />);
 
     expect(screen.getByTestId("ErrorPageMock")).toBeInTheDocument();
+  });
+
+  it("fetches products on mount", async () => {
+    const router = createTestRouter();
+
+    globalThis.fetch = vi.fn(() =>
+      Promise.resolve({
+        ok: true,
+        json: () => Promise.resolve([]),
+      })
+    );
+
+    render(<RouterProvider router={router} />);
+
+    await waitFor(() => {
+      expect(fetch).toHaveBeenCalled();
+    });
   });
 });
