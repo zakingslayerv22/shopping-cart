@@ -19,7 +19,7 @@ const createTestRouter = (path = "/") =>
   createMemoryRouter(routes, { initialEntries: [path] });
 
 describe("Home component and Routing", () => {
-  it("renders the primary navigation links", () => {
+  it("renders the primary navigation links with correct default cart items (0)", () => {
     const router = createTestRouter();
 
     render(<RouterProvider router={router} />);
@@ -28,7 +28,7 @@ describe("Home component and Routing", () => {
 
     expect(links[0].textContent).toMatch(/home/i);
     expect(links[1].textContent).toMatch(/shop/i);
-    expect(links[2].textContent).toMatch(/cart/i);
+    expect(links[2].textContent).toMatch(/cart \(0 items\)/i);
   });
 
   it("renders Home as a layout for the Shop page", () => {
