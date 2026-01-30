@@ -11,7 +11,7 @@ const Shop = () => {
   } = useOutletContext();
 
   if (!productsList) {
-    return <h1>fetching products...</h1>;
+    return <h3>fetching products...</h3>;
   }
 
   return (
