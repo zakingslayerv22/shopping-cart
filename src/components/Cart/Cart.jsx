@@ -75,7 +75,7 @@ const Cart = () => {
             </div>
           );
         })}
-        <p>Total Price: {computeCartTotalPrice(productsList)}</p>
+        <p>Total Price: ${computeCartTotalPrice(productsList)}</p>
       </section>
       <button>Proceed to checkout</button>
     </div>

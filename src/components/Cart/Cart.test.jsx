@@ -69,7 +69,7 @@ describe("Test Cart's functionality", () => {
     expect(screen.getByText("Hermès Birkin Bag")).toBeInTheDocument();
     expect(screen.getByText("$201")).toBeInTheDocument();
 
-    expect(screen.getByText("Total Price: 427.5")).toBeInTheDocument();
+    expect(screen.getByText("Total Price: $427.5")).toBeInTheDocument();
   });
 
   it("updates the quantity in cart when the user clicks increment", async () => {
@@ -87,7 +87,7 @@ describe("Test Cart's functionality", () => {
     await userEvent.click(firstIncrementButton);
 
     expect(firstUnitSumParagraph.textContent).toBe("5");
-    expect(screen.getByText("Total Price: 578.5")).toBeInTheDocument();
+    expect(screen.getByText("Total Price: $578.5")).toBeInTheDocument();
   });
 
   it("updates the quantity in cart when the user clicks decrement", async () => {
@@ -105,7 +105,7 @@ describe("Test Cart's functionality", () => {
     await userEvent.click(firstDecrementButton);
 
     expect(firstUnitSumParagraph.textContent).toBe("1");
-    expect(screen.getByText("Total Price: 276.5")).toBeInTheDocument();
+    expect(screen.getByText("Total Price: $276.5")).toBeInTheDocument();
   });
 
   it("removes the product from the cart when quantity in cart is 0", async () => {
