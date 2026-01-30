@@ -19,6 +19,12 @@ const Cart = () => {
     );
   }
 
+  if (!computeCartTotalPrice(productsList)) {
+    return (
+      <h2>No products in cart yet. Add products to cart first to continue.</h2>
+    );
+  }
+
   return (
     <div>
       {console.log(productsList)}
