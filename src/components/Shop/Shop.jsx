@@ -16,7 +16,7 @@ const Shop = () => {
 
   return (
     <div>
-      <h3>Hello I am Shop. Welcome to Shop</h3>
+      <h3>This is shop.</h3>
       <section className={styles.productsContainer}>
         {productsList.map((product) => (
           <div key={product.id} className={styles.card}>

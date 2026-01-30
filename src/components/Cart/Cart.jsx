@@ -19,7 +19,7 @@ const Cart = () => {
 
   return (
     <div>
-      {console.log(productsList)}
+      {/* {console.log(productsList)} */}
       <h3>Hello, I am Cart. You can add things to the cart!</h3>
       <Link to="/">Back Home</Link>
       <section>
