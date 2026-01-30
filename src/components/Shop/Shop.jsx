@@ -17,6 +17,7 @@ const Shop = () => {
   return (
     <div>
       <h3>This is shop.</h3>
+      <Link to="/">Back Home</Link>
       <section className={styles.productsContainer}>
         {productsList.map((product) => (
           <div key={product.id} className={styles.card}>
@@ -73,7 +74,6 @@ const Shop = () => {
           </div>
         ))}
       </section>
-      <Link to="/">Back Home</Link>
     </div>
   );
 };
