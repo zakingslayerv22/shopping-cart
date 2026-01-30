@@ -5,24 +5,16 @@ const Cart = () => {
   const { productsList, handleQuantityChange, updateCartQuantity } =
     useOutletContext();
 
-  const computeCartTotalPrice = (productsList = []) => {
-    return productsList.reduce(
+  const computeCartTotalPrice = (productsList) => {
+    return (productsList ?? []).reduce(
       (total, currentProduct) =>
         total + currentProduct.quantityInCart * currentProduct.price,
       0
     );
   };
 
-  if (!productsList) {
-    return (
-      <h2>No products in cart yet. Add products to cart first to continue.</h2>
-    );
-  }
-
   if (!computeCartTotalPrice(productsList)) {
-    return (
-      <h2>No products in cart yet. Add products to cart first to continue.</h2>
-    );
+    return <h3>No products in cart yet. Add products to cart to continue.</h3>;
   }
 
   return (
