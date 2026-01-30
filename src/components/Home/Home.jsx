@@ -27,7 +27,6 @@ const Home = () => {
           ...product,
           quantitySelected: 0,
           quantityInCart: 0,
-          // totalPriceInCart: 0,
         }));
 
         setProductsList(productsWithQuantities);
@@ -98,15 +97,21 @@ const Home = () => {
 
   return (
     <>
-      {console.log(productsList)}
-      <Link to="/">
-        {" "}
-        <h2>Home</h2>
-      </Link>
-      <nav className={styles.nav}>
-        <Link to="shop">Shop</Link>
-        <Link to="cart">Cart ({cartItemsTotal} items)</Link>
-      </nav>
+      {/* {console.log(productsList)} */}
+      <div className={styles.header}>
+        <Link to="/">
+          {" "}
+          <h2>Home</h2>
+        </Link>
+        <nav className={styles.nav}>
+          <Link to="shop">
+            <h2>Shop</h2>
+          </Link>
+          <Link to="cart">
+            <h2>Cart ({cartItemsTotal} items)</h2>
+          </Link>
+        </nav>
+      </div>
       <hr />
 
       <Outlet
